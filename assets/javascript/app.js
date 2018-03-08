@@ -1,8 +1,10 @@
 
+$(function() { 
 
-
-
-
+    var wins = 0;
+    var losses = 0;
+    
+    // var setInterval;
 
     var questions = [
         { 
@@ -60,3 +62,53 @@
            answer: "John Williams",
            pic: "assets/images/johnwilliams.jpg"
         }]
+
+
+        // create onclick
+        $("#startBtn").on("click", function(){
+            getQuestion();
+        })
+        
+        function getQuestion(){
+            index++;
+            timer();
+
+        }
+      
+        
+        // For each, Create an interval with a timeout.
+        
+        var count=11;
+
+        var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+
+        function timer()
+        {
+            count=count-1;
+            if (count <= 0)
+            {
+                clearInterval(counter);
+                //counter ended, do something here
+                
+        }
+        $("#timer").html(count);
+        //Do code for showing the number of seconds here
+        }
+       
+
+        // Once interval has either timed out, or the click has happened, set a new interval to display after a few seconds without the user having to click a button.
+        // Create an onClick function inside the for loop, and if/else to determine DOM manipulation.
+        // Append the associated pic whether answer was correct or incorrect.
+        // If correct, show screen congratulating them.
+        // if time out, tell the player that time's up and display correct answer
+        // If incorrect choice is chosen, tell player the correct answer
+        // Log the Win/Loss in a hidden var that will display once the game has ended. 
+        // Once the game is over, give player an option to restart game(without reloading page)
+
+
+
+
+
+
+    });
+  
