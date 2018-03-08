@@ -4,6 +4,8 @@ $(function() {
     var wins = 0;
     var losses = 0;
     
+
+    var index = -1;
     // var setInterval;
 
     var questions = [
@@ -66,13 +68,27 @@ $(function() {
 
         // create onclick
         $("#startBtn").on("click", function(){
-            getQuestion();
+            loadQuestion();
+            $("#startBtn").remove();
         })
-        
-        function getQuestion(){
+        // this is a function to load the question. Need to get the next question from the questions object.
+        // Need to start the timer
+        function loadQuestion(){
             index++;
+            
+            if(index < questions.length){
+                clearInterval(timer);
+                clearQuestion();
+                $(".question").html("<p>" + questions[index].question + "</p>");
+                // answerOptions();
+            }
             timer();
+        }
 
+        function clearQuestion() {
+            $("#timer").empty();
+            $(".question").empty();
+            $(".choices").empty();
         }
       
         
