@@ -4,6 +4,7 @@ $(function() {
     var wins = 0;
     var losses = 0;
     
+    
 
     var index = -1;
     // var setInterval;
@@ -70,7 +71,8 @@ $(function() {
         $("#startBtn").on("click", function(){
             loadQuestion();
             $("#startBtn").remove();
-        })
+           
+        
         // this is a function to load the question. Need to get the next question from the questions object.
         // Need to start the timer
         function loadQuestion(){
@@ -80,7 +82,7 @@ $(function() {
                 clearInterval(timer);
                 clearQuestion();
                 $(".question").html("<p>" + questions[index].question + "</p>");
-                // answerOptions();
+                answerOptions();
             }
             timer();
         }
@@ -90,11 +92,54 @@ $(function() {
             $(".question").empty();
             $(".choices").empty();
         }
-      
+       
+        function answerOptions(){
+            for(var i=0; i<4; i++){
+            var button = $("<button>");
+                button.addClass("choice btn btn-warning col");
+                button.attr("type", "button");
+                button.val(i);
+                button.text(questions[index].choices[i]);
+                $(".choices").append(button);
+
+            }
+        }
+
+// onclick for the buttons created
+        $(".choices").on("click", "button", function () {
+            clearInterval(counter);
+            $("#timer").empty();
+            if ($(this).text() === "Play Again") {
+                resetGame();
+            } else {
+                correctAnswer($(this));
+                $(".clicked").empty();
+            }
+        });
+
+
+
+         function correctAnswer(question){
+             if(question.text() === questions[index].answer){
+                 wins++;
+                
+                 var results = "Yes, that is correct!";
+                 var resultImage = $("<img src= "+questions[index].pic +">");
+                 $(".choices").append(results).append(resultImage);
+                 $(".choices").html(results);
+
+                }
+                else
+                {
+                    losses++;
+                    results = "Wrong Answer. The correct answer is " + questions[index].answer;
+                    $(".choices").html(results);
+                }
+         }
         
         // For each, Create an interval with a timeout.
         
-        var count=11;
+        var count=10;
 
         var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
 
@@ -104,7 +149,8 @@ $(function() {
             if (count <= 0)
             {
                 clearInterval(counter);
-                //counter ended, do something here
+                correctAnswer();
+                // counter ended, do something here
                 
         }
         $("#timer").html(count);
@@ -125,6 +171,6 @@ $(function() {
 
 
 
-
+    })
     });
   

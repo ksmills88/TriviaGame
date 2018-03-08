@@ -1,0 +1,12 @@
+.container {
+    margin-left: 25%;
+    margin-right: 25%;
+    width:50%;
+    margin-top: 20px;
+    background-color: lightskyblue;
+    min-height: 400px;
+    text-align: center;
+    padding: 30px;
+    padding-left:60px;
+    padding-right: 60px;
+}
